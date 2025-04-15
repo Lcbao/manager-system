@@ -50,8 +50,8 @@ export default function HomePage() {
     queryKey: ["users", { 
       name: debouncedName,
       email: debouncedEmail,
-      gender: debouncedGender,
-      status: debouncedStatus, 
+      gender: filters.gender,
+      status: filters.status, 
     }, page],
     
     queryFn: () => fetchUsers({ ...filters,
