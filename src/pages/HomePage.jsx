@@ -24,7 +24,7 @@ export default function HomePage() {
   
   useEffect(() => {
     setPage(1);
-  }, [filters.name, filters.gender, filters.status]);
+  }, [debouncedName, debouncedEmail]);
 
   const handleResetFilters = () => {
     const isChanged =
@@ -47,22 +47,12 @@ export default function HomePage() {
   
 
   const { data: usersData, isLoading, isError, isFetching } = useQuery({
-    queryKey: ["users", { 
-      name: debouncedName,
-      email: debouncedEmail,
-      gender: filters.gender,
-      status: filters.status, 
-    }, page],
-    
-    queryFn: () => fetchUsers({ ...filters,
-      name: debouncedName,
-      email: debouncedEmail,
-    
-      page,
-    }),
+    queryKey: ["users", filters, page], 
+    queryFn: () => fetchUsers({ ...filters, page }), 
     keepPreviousData: true,
     staleTime: 5 * 60 * 1000,
   });
+  
   const users = usersData?.data || [];
   const totalPages = usersData?.totalPages || 1;
   
@@ -90,6 +80,7 @@ export default function HomePage() {
           onChange={(e) =>
             setFilters((prev) => ({ ...prev, email: e.target.value }))
           }
+          
           className="border px-4 py-2 rounded-lg"
         />
  <div className="relative w-52">
