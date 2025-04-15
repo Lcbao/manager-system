@@ -1,16 +1,60 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import UserDetailPage from "../pages/UserDetailPage";
+import UserDetailPage from "../pages/UserPage/UserDetailPage";
+import UserListPage from "../pages/UserPage/UserListPage";
+import NavBar from "../components/NavBar";
+import PostListPage from "../pages/PostPage/PostListPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: (
+      <>
+      <NavBar />
+      <UserListPage />
+      </>
+    
+  ),
+  },
+  {
+    path: "/users",
+    element: (
+      <>
+      <NavBar />
+      <UserListPage />
+      </>
+    
+  ),
   },
   {
     path: "/users/:id",
-    element: <UserDetailPage />,
+    element: (
+      <>
+      <NavBar />
+      <UserDetailPage />
+      </>
+    
+  ),
   },
+  {
+    path: "/posts",
+    element: (
+      <>
+      <NavBar />
+      <PostListPage />
+      </>
+    
+  ),
+  },
+  // {
+  //   path: "/posts/:id",
+  //   element: (
+  //     <>
+  //     <NavBar />
+  //     <PostDetailPage />
+  //     </>
+    
+  // ),
+  // },
 ]);
 
  function AppRouter() {
